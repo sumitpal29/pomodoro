@@ -1,0 +1,15 @@
+const WORK_TIME = 25;
+const BREAK_TIME = 5;
+const LONG_BREAK_TIME = 15;
+
+const PAUSE = "PAUSE";
+const START = "START";
+const RESET = "RESET";
+
+const TIMER_STATUS = {
+  PAUSE,
+  START,
+  RESET,
+};
+
+export { WORK_TIME, BREAK_TIME, LONG_BREAK_TIME, TIMER_STATUS };
