@@ -24,13 +24,17 @@ function Pomodoro(props) {
   // onStart
   // countDown
 
-  const { status = TIMER_STATUS.PAUSE } = props;
+  const {
+    status = TIMER_STATUS.PAUSE,
+    styles = {},
+    onComplete = () => {},
+  } = props;
   const [isTimerStarted, setTimerStartedValue] = useState(false);
 
   const { seconds, reset } = useTimer(
     isTimerStarted,
     minsToSec(WORK_TIME),
-    () => console.log("completed")
+    onComplete
   );
 
   const onReset = useCallback(() => {
@@ -38,7 +42,6 @@ function Pomodoro(props) {
   }, [reset]);
 
   useEffect(() => {
-    console.log(status);
     if (status === TIMER_STATUS.PAUSE) setTimerStartedValue(false);
     else if (status === TIMER_STATUS.START) setTimerStartedValue(true);
     else if (status === TIMER_STATUS.RESET) {
@@ -54,6 +57,7 @@ function Pomodoro(props) {
           <CircularProgressbar
             value={(seconds * 100) / minsToSec(WORK_TIME)}
             text={secondsToTimeString(seconds)}
+            styles={styles}
           />
         }
       </div>
